@@ -31,11 +31,11 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index' %}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3"><sup>1</sup>일망타진<sup>1</sup></div>
+                <div class="sidebar-brand-text mx-3"><sup>.</sup>일망타진<sup>.</sup></div>
             </a>
 
             <hr class="sidebar-divider">
@@ -43,7 +43,7 @@
                 Overview
             </div>
             <li class="nav-item active">
-                <a class="nav-link">
+                <a class="nav-link" href="{% url 'index' %}">
                     <span>데이터 탐색</span></a>
             </li>
             <hr class="sidebar-divider">
@@ -106,7 +106,7 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <h1 class="h2 mb-2 text-dark-green-600">시공간적 특성에 따른 공공자전거 이용량</h1>
+                    <h1 class="h2 mb-2 mt-2 text-gray-900 font-weight-bold">시공간적 특성에 따른 공공자전거 이용량</h1>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -261,8 +261,20 @@
                     </div>
                 </div>
             </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; 일망타진 2022</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
         </div>
+        <!-- End of Content Wrapper -->
     </div>
+    <!-- End of Page Wrapper -->
     <table border="1">
         <col width="50">
         <col width="100">

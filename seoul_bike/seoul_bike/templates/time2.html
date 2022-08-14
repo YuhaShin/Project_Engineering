@@ -133,10 +133,7 @@
                                 </form>
                             </div>
                         </li>
-
-
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
 
@@ -145,31 +142,27 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">시간적 요소</h1>
-                    <p class="mb-4">월별 및 시간대별 공공자전거 이용량을 파악함으로써
-                        시간적 요소가 의미 있는 독립변수인지 확인한다</p>
+                    <p class="mb-4">시간과 관련성이 높은 유동 인구와 공공자전거 이용량 추이를 파악함으로써
+                        유동 인구가 의미 있는 독립변수인지 확인한다</p>
 
                     <!-- Content Row -->
                     <div class="row">
-
                         <div class="col-12">
-
-                            <!-- Area Chart -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">월별 따릉이 이용량</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                    <hr>
-                                </div>
-                            </div>
-
+                            <a href="#" class="btn btn-primary btn-icon-split">
+                                <span class="text">생활인구</span>
+                            </a>
+                            <a href="#" class="btn btn-primary btn-icon-split">
+                                <span class="text">지하철 유동인구</span>
+                            </a>
+                            <a href="#" class="btn btn-primary btn-icon-split">
+                                <span class="text">버스 유동인구</span>
+                            </a>
+                        </div>
+                        <div class="col-12">
                             <!-- Bar Chart -->
-                            <div class="card shadow mb-4">
+                            <div class="card shadow mb-4 h-100">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">시간대별 따릉이 이용량</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">시간대별 유동인구와 이용량</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
@@ -206,6 +199,7 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>

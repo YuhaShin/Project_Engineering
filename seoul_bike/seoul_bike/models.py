@@ -33,13 +33,13 @@ class DongCode(models.Model):
 
 
 class DongPopul(models.Model):
-    row_id = models.BigIntegerField(primary_key=True)
-    base_dt = models.TextField(blank=True, null=True)
-    base_tm = models.TextField(blank=True, null=True)
-    dong_cd = models.TextField(blank=True, null=True)
-    life_popul = models.TextField(blank=True, null=True)
-    bus_popul = models.FloatField(blank=True, null=True)
-    subway_popul = models.FloatField(blank=True, null=True)
+    row_id = models.BigAutoField(primary_key=True)
+    base_dt = models.DateField()
+    base_tm = models.IntegerField()
+    dong_cd = models.CharField(max_length=10)
+    life_popul = models.FloatField()
+    bus_popul = models.FloatField()
+    sub_popul = models.FloatField()
 
     class Meta:
         managed = False
@@ -70,6 +70,17 @@ class EventPlace(models.Model):
         db_table = 'EVENT_PLACE'
 
 
+class EventStation(models.Model):
+    row_id = models.BigIntegerField(primary_key=True)
+    place_id = models.BigIntegerField(blank=True, null=True)
+    place_nm = models.TextField(blank=True, null=True)
+    station_id = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'EVENT_STATION'
+
+
 class GuCode(models.Model):
     gu_cd = models.IntegerField(primary_key=True)
     gu_nm = models.TextField(blank=True, null=True)
@@ -80,25 +91,50 @@ class GuCode(models.Model):
 
 
 class GuRain(models.Model):
-    rain_amt = models.TextField(blank=True, null=True)
-    gu_cd = models.TextField(blank=True, null=True)
-    base_dt = models.TextField(blank=True, null=True)
-    base_tm = models.TextField(blank=True, null=True)
-    gu_name = models.TextField(blank=True, null=True)
+    row_id = models.BigAutoField(primary_key=True)
+    gu_name = models.CharField(max_length=10)
+    gu_cd = models.IntegerField()
+    base_dt = models.DateField()
+    base_tm = models.CharField(max_length=10)
+    rain_amt = models.FloatField()
 
     class Meta:
         managed = False
         db_table = 'GU_RAIN'
 
 
+class Test(models.Model):
+    row_i = models.BigAutoField(primary_key=True)
+    gu_name = models.CharField(max_length=10)
+    gu_cd = models.IntegerField()
+    base_dt = models.DateField()
+    base_tm = models.CharField(max_length=10)
+    rain_amt = models.FloatField()
+
+    class Meta:
+        managed = False
+        db_table = 'TEST'
+
+
 class TourPlace(models.Model):
     place_id = models.IntegerField(primary_key=True)
     place_nm = models.TextField()
-    place_star = models.FloatField(blank=True, null=True)
+    place_star = models.FloatField()
 
     class Meta:
         managed = False
         db_table = 'TOUR_PLACE'
+
+
+class TourStation(models.Model):
+    row_id = models.BigIntegerField(primary_key=True)
+    place_id = models.BigIntegerField()
+    place_nm = models.TextField()
+    station_id = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'TOUR_STATION'
 
 
 class AuthGroup(models.Model):

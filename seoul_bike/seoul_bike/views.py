@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from .models import DongCode
+from .models import *
 
 def index(request):
-    return render(request, 'index.html', {'list': DongCode.objects.all()})
+    return render(request, 'index.html')
 
 def time1(request):
     return render(request, 'time1.html')
