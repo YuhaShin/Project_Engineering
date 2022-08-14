@@ -6,6 +6,6 @@ from seoul_bike.models import *
 import pandas as pd
 
 
-df2 = pd.DataFrame(list(DongCode.objects.all().values()))
 
-print(df2)
+#df2 = pd.DataFrame(list(DongCode.objects.all().values()))
+

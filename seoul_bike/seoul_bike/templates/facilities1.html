@@ -141,21 +141,21 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">시간적 요소 : 생활인구/유동인구</h1>
-                    <p class="mb-4">시간과 관련성이 높은 유동 인구와 공공자전거 이용량 추이를 파악함으로써 <br>
-                        유동 인구가 의미 있는 독립변수인지 확인한다</p>
+                    <h1 class="h3 mb-2 text-gray-800">공간적 요소 : 교통시설</h1>
+                    <p class="mb-4">따릉이 대여소 근처 버스정류장 및 지하철역 개수와 공공자전거 이용량의 산점도를 통해 <br>
+                        교통시설이 의미 있는 독립변수인지 확인한다</p>
 
                     <!-- Content Row -->
                     <div class="row justify-content-center">
                         <div class="btn-group btn-group-toggle mt-3 mb-2" data-toggle="buttons">
-                          <label class="btn btn-primary">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> 생활인구
+                          <label class="btn btn-selected">
+                            <input type="radio" name="options" id="option1" autocomplete="off" onclick="location.href='/facilities1'"> 교통시설
                           </label>
                           <label class="btn btn-primary">
-                            <input type="radio" name="options" id="option2" autocomplete="off"> 지하철 유동인구
+                            <input type="radio" name="options" id="option2" autocomplete="off" onclick="location.href='/facilities2'"> 근린시설
                           </label>
                           <label class="btn btn-primary">
-                            <input type="radio" name="options" id="option3" autocomplete="off"> 버스 유동인구
+                            <input type="radio" name="options" id="option3" autocomplete="off" onclick="location.href='/facilities3'"> 교육시설
                           </label>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                             <!-- Bar Chart -->
                             <div class="card shadow mb-4 h-100">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">시간대별 인구와 이용량</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">교통시설과 이용량</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
@@ -192,8 +192,8 @@
             <!-- End of Footer -->
 
         </div>
-        <!-- End of Content Wrapper -->
 
+        <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
 
