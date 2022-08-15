@@ -367,3 +367,11 @@ class TourCount(models.Model):
     class Meta:
         managed = False
         db_table = 'tour_count'
+
+class MonthUsage(models.Model):
+    month = models.CharField(max_length=255, blank=True, null=True)
+    bike_usage = models.BigIntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'month_usage'

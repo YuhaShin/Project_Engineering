@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from .models import *
+from django.http import HttpResponse
+
 
 def index(request):
     return render(request, 'index.html')
+
 
 def time1(request):
     return render(request, 'time1.html')
