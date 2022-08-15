@@ -75,11 +75,11 @@ WSGI_APPLICATION = "seoul_bike.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pjt2',
+        'NAME': 'pjt2_visual',
         'USER': 'team01',
         'PASSWORD': '12345',
         'HOST': '54.248.183.216',
@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

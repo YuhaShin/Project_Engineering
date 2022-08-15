@@ -8,362 +8,61 @@
 from django.db import models
 
 
-class BikeUsage(models.Model):
-    row_id = models.BigIntegerField(primary_key=True)
-    station_id = models.TextField(blank=True, null=True)
-    use_dt = models.TextField(blank=True, null=True)
-    use_tm = models.TextField(blank=True, null=True)
-    rent_amt = models.BigIntegerField()
-    return_amt = models.BigIntegerField()
+class MonthTimeUsage(models.Model):
+    base_mn = models.CharField(max_length=2, db_collation='utf8_general_ci', blank=True, null=True)
+    base_tm = models.TextField(db_collation='utf8_general_ci', blank=True, null=True)
+    usage_amt = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'BIKE_USAGE'
+        db_table = 'month_time_usage'
 
 
-class DongCode(models.Model):
-    dong_cd = models.IntegerField(primary_key=True)
-    dong_cd_8 = models.TextField(blank=True, null=True)
-    dong_nm = models.TextField(blank=True, null=True)
-    gu_cd = models.TextField(blank=True, null=True)
+class MonthUsage(models.Model):
+    date = models.CharField(max_length=7, db_collation='utf8mb4_general_ci', blank=True, null=True)
+    s = models.DecimalField(max_digits=42, decimal_places=0, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'DONG_CODE'
+        db_table = 'month_usage'
 
 
-class DongPopul(models.Model):
-    row_id = models.BigAutoField(primary_key=True)
-    base_dt = models.DateField()
+class PopulUsage(models.Model):
     base_tm = models.IntegerField()
-    dong_cd = models.CharField(max_length=10)
-    life_popul = models.FloatField()
-    bus_popul = models.FloatField()
-    sub_popul = models.FloatField()
+    usage_amt = models.DecimalField(max_digits=46, decimal_places=4, blank=True, null=True)
+    life_popul = models.FloatField(blank=True, null=True)
+    bus_popul = models.FloatField(blank=True, null=True)
+    sub_popul = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'DONG_POPUL'
+        db_table = 'popul_usage'
 
 
-class EventInfo(models.Model):
-    row_id = models.BigIntegerField(primary_key=True)
-    event_nm = models.TextField(blank=True, null=True)
-    place_id = models.IntegerField()
-    from_dt = models.DateField(blank=True, null=True)
-    to_dt = models.DateField(blank=True, null=True)
-    event_tm = models.TextField(blank=True, null=True)
-    target_kb = models.TextField(blank=True, null=True)
-    fare_amt = models.TextField(blank=True, null=True)
+class RainUsage06(models.Model):
+    base_dt = models.TextField(db_collation='utf8_general_ci', blank=True, null=True)
+    bike_usage = models.DecimalField(max_digits=42, decimal_places=0, blank=True, null=True)
+    rain_amt = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'EVENT_INFO'
+        db_table = 'rain_usage_06'
 
 
-class EventPlace(models.Model):
-    place_id = models.IntegerField(primary_key=True)
-    place_nm = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'EVENT_PLACE'
-
-
-class EventStation(models.Model):
-    row_id = models.BigIntegerField(primary_key=True)
-    place_id = models.BigIntegerField(blank=True, null=True)
-    place_nm = models.TextField(blank=True, null=True)
-    station_id = models.TextField(blank=True, null=True)
+class StationUsage(models.Model):
+    station_id = models.TextField(db_collation='utf8_general_ci', blank=True, null=True)
+    rent_amt = models.DecimalField(max_digits=41, decimal_places=0, blank=True, null=True)
+    return_amt = models.DecimalField(max_digits=41, decimal_places=0, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'EVENT_STATION'
+        db_table = 'station_usage'
 
 
-class GuCode(models.Model):
-    gu_cd = models.IntegerField(primary_key=True)
-    gu_nm = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'GU_CODE'
-
-
-class GuRain(models.Model):
-    row_id = models.BigAutoField(primary_key=True)
-    gu_name = models.CharField(max_length=10)
-    gu_cd = models.IntegerField()
-    base_dt = models.DateField()
-    base_tm = models.CharField(max_length=10)
-    rain_amt = models.FloatField()
+class TimeUsage(models.Model):
+    use_tm = models.TextField(db_collation='utf8_general_ci', blank=True, null=True)
+    bikeusage = models.DecimalField(max_digits=46, decimal_places=4, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'GU_RAIN'
-
-
-class Test(models.Model):
-    row_i = models.BigAutoField(primary_key=True)
-    gu_name = models.CharField(max_length=10)
-    gu_cd = models.IntegerField()
-    base_dt = models.DateField()
-    base_tm = models.CharField(max_length=10)
-    rain_amt = models.FloatField()
-
-    class Meta:
-        managed = False
-        db_table = 'TEST'
-
-
-class TourPlace(models.Model):
-    place_id = models.IntegerField(primary_key=True)
-    place_nm = models.TextField()
-    place_star = models.FloatField()
-
-    class Meta:
-        managed = False
-        db_table = 'TOUR_PLACE'
-
-
-class TourStation(models.Model):
-    row_id = models.BigIntegerField(primary_key=True)
-    place_id = models.BigIntegerField()
-    place_nm = models.TextField()
-    station_id = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'TOUR_STATION'
-
-
-class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=150)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group'
-
-
-class AuthGroupPermissions(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group_permissions'
-        unique_together = (('group', 'permission'),)
-
-
-class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
-    codename = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
-
-
-class AuthUser(models.Model):
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.IntegerField()
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
-    email = models.CharField(max_length=254)
-    is_staff = models.IntegerField()
-    is_active = models.IntegerField()
-    date_joined = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user'
-
-
-class AuthUserGroups(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_groups'
-        unique_together = (('user', 'group'),)
-
-
-class AuthUserUserPermissions(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_user_permissions'
-        unique_together = (('user', 'permission'),)
-
-
-class BusCount(models.Model):
-    station_id = models.TextField(blank=True, null=True)
-    station_addr = models.TextField(blank=True, null=True)
-    dong_cd = models.TextField(blank=True, null=True)
-    bus_station_cnt = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'bus_count'
-
-
-class CultureCount(models.Model):
-    station_id = models.TextField(blank=True, null=True)
-    station_addr = models.TextField(blank=True, null=True)
-    dong_cd = models.TextField(blank=True, null=True)
-    culture_place_cnt = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'culture_count'
-
-
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.PositiveSmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'django_admin_log'
-
-
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'django_content_type'
-        unique_together = (('app_label', 'model'),)
-
-
-class DjangoMigrations(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_migrations'
-
-
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_session'
-
-
-class EventCount(models.Model):
-    station_id = models.TextField(blank=True, null=True)
-    station_addr = models.TextField(blank=True, null=True)
-    dong_cd = models.TextField(blank=True, null=True)
-    event_place_cnt = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'event_count'
-
-
-class MallCount(models.Model):
-    station_id = models.TextField(blank=True, null=True)
-    station_addr = models.TextField(blank=True, null=True)
-    dong_cd = models.TextField(blank=True, null=True)
-    mall_cnt = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'mall_count'
-
-
-class ParkCount(models.Model):
-    station_id = models.TextField(blank=True, null=True)
-    station_addr = models.TextField(blank=True, null=True)
-    dong_cd = models.TextField(blank=True, null=True)
-    park_cnt = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'park_count'
-
-
-class RoadCount(models.Model):
-    station_id = models.TextField(blank=True, null=True)
-    station_addr = models.TextField(blank=True, null=True)
-    dong_cd = models.TextField(blank=True, null=True)
-    bike_road_cnt = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'road_count'
-
-
-class SchoolCount(models.Model):
-    station_id = models.TextField(blank=True, null=True)
-    station_addr = models.TextField(blank=True, null=True)
-    dong_cd = models.TextField(blank=True, null=True)
-    school_cnt = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'school_count'
-
-
-class StationNear(models.Model):
-    station_id = models.IntegerField(primary_key=True)
-    station_addr = models.TextField(blank=True, null=True)
-    dong_cd = models.TextField(blank=True, null=True)
-    bus_cnt = models.BigIntegerField(blank=True, null=True)
-    culture_cnt = models.BigIntegerField(blank=True, null=True)
-    event_cnt = models.BigIntegerField(blank=True, null=True)
-    mall_cnt = models.BigIntegerField(blank=True, null=True)
-    park_cnt = models.BigIntegerField(blank=True, null=True)
-    road_cnt = models.BigIntegerField(blank=True, null=True)
-    school_cnt = models.BigIntegerField(blank=True, null=True)
-    sub_cnt = models.BigIntegerField(blank=True, null=True)
-    tour_cnt = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'station_near'
-
-
-class SubCount(models.Model):
-    station_id = models.TextField(blank=True, null=True)
-    station_addr = models.TextField(blank=True, null=True)
-    dong_cd = models.TextField(blank=True, null=True)
-    subway_station_cnt = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'sub_count'
-
-
-class TourCount(models.Model):
-    station_id = models.TextField(blank=True, null=True)
-    station_addr = models.TextField(blank=True, null=True)
-    dong_cd = models.TextField(blank=True, null=True)
-    tour_place_cnt = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tour_count'
+        db_table = 'time_usage'
