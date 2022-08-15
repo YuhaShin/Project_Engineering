@@ -8,8 +8,123 @@
 from django.db import models
 
 
+class AuthGroup(models.Model):
+    name = models.CharField(unique=True, max_length=150)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    name = models.CharField(max_length=255)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.IntegerField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
+    email = models.CharField(max_length=254)
+    is_staff = models.IntegerField()
+    is_active = models.IntegerField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
+class AuthUserGroups(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
+
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.PositiveSmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+
+
+class DjangoContentType(models.Model):
+    app_label = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'django_content_type'
+        unique_together = (('app_label', 'model'),)
+
+
+class DjangoMigrations(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    app = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    applied = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40)
+    session_data = models.TextField()
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_session'
+
+
 class MonthTimeUsage(models.Model):
-    base_mn = models.CharField(max_length=2, db_collation='utf8_general_ci', blank=True, null=True)
+    index = models.AutoField(primary_key=True)
+    base_mm = models.CharField(max_length=2, db_collation='utf8_general_ci', blank=True, null=True)
     base_tm = models.TextField(db_collation='utf8_general_ci', blank=True, null=True)
     usage_amt = models.FloatField(blank=True, null=True)
 
@@ -19,8 +134,9 @@ class MonthTimeUsage(models.Model):
 
 
 class MonthUsage(models.Model):
-    date = models.CharField(max_length=7, db_collation='utf8mb4_general_ci', blank=True, null=True)
-    s = models.DecimalField(max_digits=42, decimal_places=0, blank=True, null=True)
+    index = models.AutoField(primary_key=True)
+    base_mm = models.CharField(max_length=7, db_collation='utf8mb4_general_ci', blank=True, null=True)
+    usage_amt = models.DecimalField(max_digits=42, decimal_places=0, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -28,7 +144,7 @@ class MonthUsage(models.Model):
 
 
 class PopulUsage(models.Model):
-    base_tm = models.IntegerField()
+    base_tm = models.IntegerField(primary_key=True)
     usage_amt = models.DecimalField(max_digits=46, decimal_places=4, blank=True, null=True)
     life_popul = models.FloatField(blank=True, null=True)
     bus_popul = models.FloatField(blank=True, null=True)
@@ -40,8 +156,9 @@ class PopulUsage(models.Model):
 
 
 class RainUsage06(models.Model):
+    index = models.AutoField(primary_key=True)
     base_dt = models.TextField(db_collation='utf8_general_ci', blank=True, null=True)
-    bike_usage = models.DecimalField(max_digits=42, decimal_places=0, blank=True, null=True)
+    usage_amt = models.DecimalField(max_digits=42, decimal_places=0, blank=True, null=True)
     rain_amt = models.FloatField(blank=True, null=True)
 
     class Meta:
@@ -49,8 +166,27 @@ class RainUsage06(models.Model):
         db_table = 'rain_usage_06'
 
 
+class StationNear(models.Model):
+    station_id = models.IntegerField(primary_key=True)
+    station_addr = models.TextField(db_collation='utf8_general_ci', blank=True, null=True)
+    dong_cd = models.TextField(db_collation='utf8_general_ci', blank=True, null=True)
+    bus_cnt = models.BigIntegerField(blank=True, null=True)
+    culture_cnt = models.BigIntegerField(blank=True, null=True)
+    event_cnt = models.BigIntegerField(blank=True, null=True)
+    mall_cnt = models.BigIntegerField(blank=True, null=True)
+    park_cnt = models.BigIntegerField(blank=True, null=True)
+    road_cnt = models.BigIntegerField(blank=True, null=True)
+    school_cnt = models.BigIntegerField(blank=True, null=True)
+    sub_cnt = models.BigIntegerField(blank=True, null=True)
+    tour_cnt = models.BigIntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'station_near'
+
+
 class StationUsage(models.Model):
-    station_id = models.TextField(db_collation='utf8_general_ci', blank=True, null=True)
+    station_id = models.IntegerField(primary_key=True)
     rent_amt = models.DecimalField(max_digits=41, decimal_places=0, blank=True, null=True)
     return_amt = models.DecimalField(max_digits=41, decimal_places=0, blank=True, null=True)
 
@@ -60,8 +196,9 @@ class StationUsage(models.Model):
 
 
 class TimeUsage(models.Model):
-    use_tm = models.TextField(db_collation='utf8_general_ci', blank=True, null=True)
-    bikeusage = models.DecimalField(max_digits=46, decimal_places=4, blank=True, null=True)
+    index = models.AutoField(primary_key=True)
+    base_tm = models.TextField(blank=True, null=True)
+    usage_amt = models.DecimalField(max_digits=46, decimal_places=4, blank=True, null=True)
 
     class Meta:
         managed = False
