@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from .models import *
 from django.http import HttpResponse
-
+from . import visual
 
 def index(request):
-    return render(request, 'index.html')
+    contexts = dict()
+    contexts['countStationId'] = visual.countStationId()
+    contexts['yearUsage'] = visual.year_usage()
+    return render(request, 'index.html', contexts)
 
 
 def time1(request):
