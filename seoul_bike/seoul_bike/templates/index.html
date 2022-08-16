@@ -62,7 +62,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">시간별 이용량 추이</h6>
                         <a class="collapse-item" href="{% url 'time1' %}">월/시간대</a>
-                        <a class="collapse-item" href="{% url 'time2' %}">생활인구/유동인구</a>
+                        <a class="collapse-item" href="{% url 'time21' %}">생활인구/유동인구</a>
                     </div>
                 </div>
             </li>
@@ -163,7 +163,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 따릉이 대여소</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">총 000 개</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> 총 {{ countStationId }} 개 </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -202,13 +202,13 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-12">
-                                                    <div class="h5 mb-2 mr-3 font-weight-bold text-gray-800">1. </div>
+                                                    <div class="h5 mb-2 mr-3 font-weight-bold text-gray-800">TOP 1. {{ topStation_id.top1_station_id }} 여의나루역 1번 출구 앞 </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <div class="h5 mb-2 mr-3 font-weight-bold text-gray-800">2. </div>
+                                                    <div class="h5 mb-2 mr-3 font-weight-bold text-gray-800">TOP 2. {{ topStation_id.top2_station_id }} 뚝섬유원지역 1번출구 앞 </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <div class="h5 mb-2 mr-3 font-weight-bold text-gray-800">3. </div>
+                                                    <div class="h5 mb-2 mr-3 font-weight-bold text-gray-800">TOP 3. {{ topStation_id.top3_station_id }} 마곡나루역 2번 출구 </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -275,7 +275,7 @@
         <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
-    <table border="1">
+    <!-- <table border="1">
         <col width="50">
         <col width="100">
         <col width="500">
@@ -299,7 +299,7 @@
                   </tr>
             {% endfor %}
         {% endif %}
-    </table>
+    </table> -->
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>

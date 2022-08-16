@@ -61,7 +61,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">시간별 이용량 추이</h6>
                         <a class="collapse-item" href="{% url 'time1' %}">월/시간대</a>
-                        <a class="collapse-item" href="{% url 'time2' %}">생활인구/유동인구</a>
+                        <a class="collapse-item" href="{% url 'time21' %}">생활인구/유동인구</a>
                     </div>
                 </div>
             </li>
@@ -149,13 +149,13 @@
                     <div class="row justify-content-center">
                         <div class="btn-group btn-group-toggle mt-3 mb-2" data-toggle="buttons">
                           <label class="btn btn-primary">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> 생활인구
+                            <input type="radio" name="options" id="option1" autocomplete="off" onclick="location.href='/time21'"> 생활인구
                           </label>
                           <label class="btn btn-primary">
-                            <input type="radio" name="options" id="option2" autocomplete="off"> 지하철 유동인구
+                            <input type="radio" name="options" id="option2" autocomplete="off" onclick="location.href='/time22'"> 지하철 유동인구
                           </label>
                           <label class="btn btn-primary">
-                            <input type="radio" name="options" id="option3" autocomplete="off"> 버스 유동인구
+                            <input type="radio" name="options" id="option3" autocomplete="off" onclick="location.href='/time23'"> 버스 유동인구
                           </label>
                         </div>
                     </div>
@@ -166,12 +166,19 @@
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">시간대별 인구와 이용량</h6>
                                 </div>
+                                    <div>
+                                        {% autoescape off %}
+                                        {{ lifeusage }}
+                                        {% endautoescape %}
+                                    </div>
+                                <!--
                                 <div class="card-body">
                                     <div class="chart-bar">
                                         <canvas id="myBarChart"></canvas>
                                     </div>
                                     <hr>
                                 </div>
+                                -->
                             </div>
                         </div>
                     </div>
