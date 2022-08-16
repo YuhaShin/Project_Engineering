@@ -141,77 +141,36 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">공간적 요소 : 교육시설</h1>
-                    <p class="mb-4">따릉이 대여소 근처 초등학교, 중학교, 고등학교 개수와 공공자전거 이용량의 산점도를 통해 <br>
-                        교육시설이 의미 있는 독립변수인지 확인한다</p>
+                    <h1 class="h3 mb-2 text-gray-800">시간적 요소 : 생활인구/유동인구</h1>
+                    <p class="mb-4">시간과 관련성이 높은 유동 인구와 공공자전거 이용량 추이를 파악함으로써 <br>
+                        유동 인구가 의미 있는 독립변수인지 확인한다</p>
 
                     <!-- Content Row -->
                     <div class="row justify-content-center">
                         <div class="btn-group btn-group-toggle mt-3 mb-2" data-toggle="buttons">
                           <label class="btn btn-primary">
-                            <input type="radio" name="options" id="option1" autocomplete="off" onclick="location.href='/facilities1'"> 교통시설
+                            <input type="radio" name="options" id="option1" autocomplete="off" onclick="location.href='/time21'"> 생활인구
                           </label>
                           <label class="btn btn-primary">
-                            <input type="radio" name="options" id="option2" autocomplete="off" onclick="location.href='/facilities2'"> 근린시설
+                            <input type="radio" name="options" id="option2" autocomplete="off" onclick="location.href='/time22'"> 지하철 유동인구
                           </label>
-                          <label class="btn btn-selected">
-                            <input type="radio" name="options" id="option3" autocomplete="off" onclick="location.href='/facilities3'"> 교육시설
+                          <label class="btn btn-primary">
+                            <input type="radio" name="options" id="option3" autocomplete="off" onclick="location.href='/time23'"> 버스 유동인구
                           </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <!-- Bar Chart -->
-                            <div class="card h-100 shadow mb-4">
+                            <div class="card shadow mb-4 h-100">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">교육시설과 이용량</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">시간대별 인구와 이용량</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <!-- Bar Chart -->
-                            <div class="card shadow mt-4 mb-4 h-60">
-                                <div class="card-header py-2">
-                                    <h6 class="m-0 font-weight-bold text-primary">따릉이 이용량 1위</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="Station1"></canvas>
-                                    </div>
-                                    <hr>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <!-- Bar Chart -->
-                            <div class="card shadow mt-4 mb-4 h-60">
-                                <div class="card-header py-2">
-                                    <h6 class="m-0 font-weight-bold text-primary">따릉이 이용량 2위</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="Station2"></canvas>
-                                    </div>
-                                    <hr>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <!-- Bar Chart -->
-                            <div class="card shadow mt-4 mb-4 h-60">
-                                <div class="card-header py-2">
-                                    <h6 class="m-0 font-weight-bold text-primary">따릉이 이용량 3위</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="Station3"></canvas>
+                                    <div>
+                                        {% autoescape off %}
+                                        {{ bususage }}
+                                        {% endautoescape %}
                                     </div>
                                     <hr>
                                 </div>

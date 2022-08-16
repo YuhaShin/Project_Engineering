@@ -61,7 +61,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">시간별 이용량 추이</h6>
                         <a class="collapse-item" href="{% url 'time1' %}">월/시간대</a>
-                        <a class="collapse-item" href="{% url 'time2' %}">생활인구/유동인구</a>
+                        <a class="collapse-item" href="{% url 'time21' %}">생활인구/유동인구</a>
                     </div>
                 </div>
             </li>
@@ -172,8 +172,10 @@
                                     <h6 class="m-0 font-weight-bold text-primary">시간대별 따릉이 이용량</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
+                                    <div>
+                                        {% autoescape off %}
+                                        {{ timeusage }}
+                                        {% endautoescape %}
                                     </div>
                                     <hr>
                                 </div>
