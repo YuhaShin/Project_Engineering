@@ -6,7 +6,6 @@ django.setup()
 import plotly.express as px
 import plotly.graph_objects as go
 from seoul_bike.models import *
-import numpy as np
 import pandas as pd
 
 import plotly.figure_factory as ff
@@ -53,6 +52,17 @@ def topStation_id():
 
 # 강우량과 공공자전거 이용량
 def rain_usage():
+    rain_usage = pd.DataFrame(list(RainUsage06.objects.all().values()))
+    fig = px.bar(rain_usage, x='rain_amt', y='usage_amt',
+                 color_continuous_scale='teal')
+    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    fig.update_yaxes(visible=False, showticklabels=False)
+    fig.update_coloraxes(showscale=False)
+    plot_div = plot(fig, output_type='div')
+    return plot_div
+
+
+def rain_usage():
     rain_usage06 = pd.DataFrame(list(RainUsage06.objects.all().values()))
 
     # rain_amt 내림차순으로 sort 한 후 처음 0인 지점까지 가져온다
@@ -64,16 +74,18 @@ def rain_usage():
         if(rain_usage06['rain_amt'][index] == 0):
             break
         else : index += 1
-    rain_usage = rain_usage06[0:index+1]
+    rainusage = rain_usage06[0:index+1]
+    rainusage = rainusage.sort_values('rain_amt')
+    rainusage = rainusage.astype({'rain_amt':'string'})
 
-    fig = go.Figure(
-        data=go.Bar(x=rain_usage.rain_amt, y=rain_usage['usage_amt'], marker=dict(color=rain_usage['usage_amt'], colorscale='blues')))
-    fig.update_layout(template='plotly_white', margin={"r": 20, "t": 20, "l": 20, "b": 20})
-    fig.update_yaxes(visible=False, showticklabels=False)
-
+    fig = px.bar(rainusage, x='rain_amt', y='usage_amt')
+    fig.update_traces(hovertemplate='<b>%{text}</b><br>', text=rainusage.usage_amt)
+    fig.update_coloraxes(showscale=False)
+    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     plot_div = plot(fig, output_type='div')
 
     return plot_div
+
 
 
 #######  [ 시간적 요소 ]  #######
@@ -81,7 +93,7 @@ def rain_usage():
 def monthusage():
     monthusage = pd.DataFrame(list(MonthUsage.objects.all().values()))
     fig = px.bar(monthusage, x= 'base_mm', y= 'usage_amt',
-                 color_continuous_scale='teal', template='plotly_white')
+                 color_continuous_scale='tealgrn', template='plotly_white')
     fig.update_traces(hovertemplate='<b>%{text}</b><br>', text=monthusage.usage_amt)
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
@@ -163,7 +175,7 @@ def transportation():
     merged = station_usage.merge(station_near, how='inner', on='station_id')
 
     fig = px.scatter(merged, x='transportation', y='usage_amt', color='transportation', size='transportation',
-                    color_continuous_scale='teal', template='plotly_white')
+                    color_continuous_scale='tealgrn', template='plotly_white')
     fig.update_traces(hovertemplate='<b>%{text}</b><br>교통시설: %{x:.0f}개<br>이용량: %{y:.0f}건', text=merged.station_id)
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
@@ -184,7 +196,7 @@ def neighborhood():
     merged = station_usage.merge(station_near, how='inner', on='station_id')
 
     fig = px.scatter(merged, x='neighborhood', y='usage_amt', color='neighborhood', size='neighborhood',
-                    color_continuous_scale='teal', template='plotly_white')
+                    color_continuous_scale='tealrose', template='plotly_white')
     fig.update_traces(hovertemplate='<b>%{text}</b><br>근린시설: %{x:.0f}개<br>이용량: %{y:.0f}건', text=merged.station_id)
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
@@ -204,7 +216,7 @@ def education():
     merged = station_usage.merge(station_near, how='inner', on='station_id')
 
     fig = px.scatter(merged, x='school_cnt', y='usage_amt', color='school_cnt', size='school_cnt',
-                    color_continuous_scale='teal', template='plotly_white')
+                    color_continuous_scale='algae', template='plotly_white')
     fig.update_traces(hovertemplate='<b>%{text}</b><br>교육시설: %{x:.0f}개<br>이용량: %{y:.0f}건', text=merged.station_id)
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
