@@ -281,7 +281,7 @@ def transportation_facility():
     # 교통시설 : BUS_STATION / SUBWAY_STATION / BIKE_ROAD
     rank_list = ranking()
     center = [rank_list[0]['coords'], rank_list[1]['coords'], rank_list[2]['coords']]
-    mapboxt = open("C:\workspaces\workspace_project\Project_Engineering\seoul_bike\seoul_bike\mapbox_token.py").read().rstrip()
+    mapboxt = open("seoul_bike/mapbox_token.py").read().rstrip()
 
     # 1번 df
     df_first = pd.DataFrame(rank_list[0])
@@ -339,7 +339,7 @@ def neighborhood_facility():
     # 근린시설 : PARK / MALL
     rank_list = ranking()
     center = [rank_list[0]['coords'], rank_list[1]['coords'], rank_list[2]['coords']]
-    mapboxt = open("C:\workspaces\workspace_project\Project_Engineering\seoul_bike\seoul_bike\mapbox_token.py").read().rstrip()
+    mapboxt = open("seoul_bike/mapbox_token.py").read().rstrip()
 
     # 1번 df
     df_first = pd.DataFrame(rank_list[0])
@@ -394,7 +394,7 @@ def education_facility():
     # 교육/문화 : SCHOOL / TOUR_PLACE / CULTURE_PLACE / EVENT_PLACE
     rank_list = ranking()
     center = [rank_list[0]['coords'], rank_list[1]['coords'], rank_list[2]['coords']]
-    mapboxt = open("C:\workspaces\workspace_project\Project_Engineering\seoul_bike\seoul_bike\mapbox_token.py").read().rstrip()
+    mapboxt = open("seoul_bike/mapbox_token.py").read().rstrip()
 
     # 1번 df
     df_first = pd.DataFrame(rank_list[0])
