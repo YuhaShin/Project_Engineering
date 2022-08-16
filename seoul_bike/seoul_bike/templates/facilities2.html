@@ -185,10 +185,11 @@
                                     <h6 class="m-0 font-weight-bold text-primary">따릉이 이용량 1위</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="Station1"></canvas>
+                                    <div class="h-100">
+                                        {% autoescape off %}
+                                        {{ NF_mymap1 }}
+                                        {% endautoescape %}
                                     </div>
-                                    <hr>
                                 </div>
                             </div>
                         </div>
@@ -199,10 +200,11 @@
                                     <h6 class="m-0 font-weight-bold text-primary">따릉이 이용량 2위</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="Station2"></canvas>
+                                    <div class="h-100">
+                                        {% autoescape off %}
+                                        {{ NF_mymap2 }}
+                                        {% endautoescape %}
                                     </div>
-                                    <hr>
                                 </div>
                             </div>
                         </div>
@@ -213,10 +215,11 @@
                                     <h6 class="m-0 font-weight-bold text-primary">따릉이 이용량 3위</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="Station3"></canvas>
+                                    <div class="h-100">
+                                        {% autoescape off %}
+                                        {{ NF_mymap3 }}
+                                        {% endautoescape %}
                                     </div>
-                                    <hr>
                                 </div>
                             </div>
                         </div>

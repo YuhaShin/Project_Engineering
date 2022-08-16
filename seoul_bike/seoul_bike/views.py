@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from . import visual
-from .models import *
-from django.http import HttpResponse
-from . import visual
+
 
 def index(request):
     contexts = dict()
@@ -39,14 +37,22 @@ def time23(request):
 def facilities1(request):
     contexts = dict()
     contexts['transportation'] = visual.transportation()
+    contexts.update(visual.transportation_facility())
+
     return render(request, 'facilities1.html', contexts)
 
 def facilities2(request):
     contexts = dict()
     contexts['neighborhood'] = visual.neighborhood()
+    contexts.update(visual.neighborhood_facility())
+
     return render(request, 'facilities2.html', contexts)
 
 def facilities3(request):
     contexts = dict()
     contexts['education'] = visual.education()
+    contexts.update(visual.education_facility())
+
     return render(request, 'facilities3.html', contexts)
+
+
