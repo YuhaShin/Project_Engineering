@@ -89,9 +89,9 @@ def monthusage():
     fig.update_traces(hovertemplate='<b>%{text}</b><br>', text=monthusage.usage_amt)
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
-    plot_div = plot(fig, output_type='div')
     fig.update_xaxes(title_text="연월")
     fig.update_yaxes(title_text="따릉이 이용량 (건)")
+    plot_div = plot(fig, output_type='div')
     return plot_div
 
 # 윌/시간대 - 시간대별 따릉이 이용량

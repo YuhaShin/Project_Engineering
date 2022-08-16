@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eef7cfbb-3d2f-4934-b92a-980ceb1eb8f4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seoul_bike/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/seoul_bike/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seoul_bike/visual.py" beforeDir="false" afterPath="$PROJECT_DIR$/seoul_bike/visual.py" afterDir="false" />
-    </list>
+    <list default="true" id="eef7cfbb-3d2f-4934-b92a-980ceb1eb8f4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
