@@ -167,8 +167,10 @@
                                     <h6 class="m-0 font-weight-bold text-primary">교육시설과 이용량</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
+                                    <div class="h-100">
+                                        {% autoescape off %}
+                                        {{ education }}
+                                        {% endautoescape %}
                                     </div>
                                 </div>
                             </div>

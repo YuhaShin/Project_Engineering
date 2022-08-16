@@ -77,6 +77,17 @@ def rain_usage():
 
 
 #######  [ 시간적 요소 ]  #######
+# 윌/시간대 - 월별 따릉이 이용량
+def monthusage():
+    monthusage = pd.DataFrame(list(MonthUsage.objects.all().values()))
+    fig = px.bar(monthusage, x= 'base_mm', y= 'usage_amt',
+                 color_continuous_scale='teal', template='plotly_white')
+    fig.update_traces(hovertemplate='<b>%{text}</b><br>', text=monthusage.usage_amt)
+    fig.update_coloraxes(showscale=False)
+    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    plot_div = plot(fig, output_type='div')
+    return plot_div
+
 # 윌/시간대 - 시간대별 따릉이 이용량
 def timeusage():
     timeusage = pd.DataFrame(list(TimeUsage.objects.all().values()))
@@ -136,5 +147,69 @@ def bususage():
     fig.update_xaxes(title_text="시간대별 버스 유동인구와 따릉이 이용량", tickangle=45)
     fig.update_yaxes(title_text="버스 유동인구", secondary_y=True)
     fig.update_yaxes(title_text="대여소 이용량", secondary_y=False)
+    plot_div = plot(fig, output_type='div')
+    return plot_div
+
+
+#######  [ 공간적 요소 ]  #######
+# 대여소별 교통시설 개수와 이용량
+def transportation():
+    station_near = pd.DataFrame(list(StationNear.objects.all().values()))
+    station_near['transportation'] = station_near['bus_cnt'] + station_near['sub_cnt']
+    station_usage = pd.DataFrame(list(StationUsage.objects.all().values()))
+    station_near = station_near[['station_id', 'transportation']]
+    station_usage['usage_amt'] = station_usage['rent_amt'] + station_usage['return_amt']
+    station_usage = station_usage[['station_id', 'usage_amt']]
+    merged = station_usage.merge(station_near, how='inner', on='station_id')
+
+    fig = px.scatter(merged, x='transportation', y='usage_amt', color='transportation', size='transportation',
+                    color_continuous_scale='teal', template='plotly_white')
+    fig.update_traces(hovertemplate='<b>%{text}</b><br>교통시설: %{x:.0f}개<br>이용량: %{y:.0f}건', text=merged.station_id)
+    fig.update_coloraxes(showscale=False)
+    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    fig.update_xaxes(title_text="대여소 근처 교통시설 수")
+    fig.update_yaxes(title_text="따릉이 이용량 (건)")
+    fig.update_yaxes(range=[0, 200000])
+    plot_div = plot(fig, output_type='div')
+    return plot_div
+
+# 대여소별 근린시설 개수와 이용량
+def neighborhood():
+    station_near = pd.DataFrame(list(StationNear.objects.all().values()))
+    station_near['neighborhood'] = station_near['culture_cnt'] + station_near['mall_cnt'] + station_near['park_cnt'] + station_near['event_cnt'] + station_near['tour_cnt']
+    station_usage = pd.DataFrame(list(StationUsage.objects.all().values()))
+    station_near = station_near[['station_id', 'neighborhood']]
+    station_usage['usage_amt'] = station_usage['rent_amt'] + station_usage['return_amt']
+    station_usage = station_usage[['station_id', 'usage_amt']]
+    merged = station_usage.merge(station_near, how='inner', on='station_id')
+
+    fig = px.scatter(merged, x='neighborhood', y='usage_amt', color='neighborhood', size='neighborhood',
+                    color_continuous_scale='teal', template='plotly_white')
+    fig.update_traces(hovertemplate='<b>%{text}</b><br>근린시설: %{x:.0f}개<br>이용량: %{y:.0f}건', text=merged.station_id)
+    fig.update_coloraxes(showscale=False)
+    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    fig.update_xaxes(title_text="대여소 근처 근린시설 수")
+    fig.update_yaxes(title_text="따릉이 이용량 (건)")
+    fig.update_yaxes(range=[0, 200000])
+    plot_div = plot(fig, output_type='div')
+    return plot_div
+
+# 대여소별 교육시설 개수와 이용량
+def education():
+    station_near = pd.DataFrame(list(StationNear.objects.all().values()))
+    station_usage = pd.DataFrame(list(StationUsage.objects.all().values()))
+    station_near = station_near[['station_id', 'school_cnt']]
+    station_usage['usage_amt'] = station_usage['rent_amt'] + station_usage['return_amt']
+    station_usage = station_usage[['station_id', 'usage_amt']]
+    merged = station_usage.merge(station_near, how='inner', on='station_id')
+
+    fig = px.scatter(merged, x='school_cnt', y='usage_amt', color='school_cnt', size='school_cnt',
+                    color_continuous_scale='teal', template='plotly_white')
+    fig.update_traces(hovertemplate='<b>%{text}</b><br>교육시설: %{x:.0f}개<br>이용량: %{y:.0f}건', text=merged.station_id)
+    fig.update_coloraxes(showscale=False)
+    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    fig.update_xaxes(title_text="대여소 근처 교육시설 수")
+    fig.update_yaxes(title_text="따릉이 이용량 (건)")
+    fig.update_yaxes(range=[0, 200000])
     plot_div = plot(fig, output_type='div')
     return plot_div

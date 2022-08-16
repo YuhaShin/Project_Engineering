@@ -159,10 +159,11 @@
                                     <h6 class="m-0 font-weight-bold text-primary">월별 따릉이 이용량</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
+                                    <div>
+                                        {% autoescape off %}
+                                        {{ monthusage }}
+                                        {% endautoescape %}
                                     </div>
-                                    <hr>
                                 </div>
                             </div>
 

@@ -18,6 +18,7 @@ def index(request):
 def time1(request):
     contexts = dict()
     contexts['timeusage'] = visual.timeusage()
+    contexts['monthusage'] = visual.monthusage()
     return render(request, 'time1.html', contexts)
 
 def time21(request):
@@ -37,12 +38,15 @@ def time23(request):
 
 def facilities1(request):
     contexts = dict()
+    contexts['transportation'] = visual.transportation()
     return render(request, 'facilities1.html', contexts)
 
 def facilities2(request):
     contexts = dict()
+    contexts['neighborhood'] = visual.neighborhood()
     return render(request, 'facilities2.html', contexts)
 
 def facilities3(request):
     contexts = dict()
+    contexts['education'] = visual.education()
     return render(request, 'facilities3.html', contexts)

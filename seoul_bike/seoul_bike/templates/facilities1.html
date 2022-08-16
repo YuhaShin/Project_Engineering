@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
 </head>
 
@@ -162,13 +163,58 @@
                     <div class="row">
                         <div class="col-12">
                             <!-- Bar Chart -->
-                            <div class="card shadow mb-4 h-100">
+                            <div class="card h-auto shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">교통시설과 이용량</h6>
                                 </div>
                                 <div class="card-body">
+                                    <div class="h-100">
+                                        {% autoescape off %}
+                                        {{ transportation }}
+                                        {% endautoescape %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <!-- Bar Chart -->
+                            <div class="card shadow mt-4 mb-4 h-60">
+                                <div class="card-header py-2">
+                                    <h6 class="m-0 font-weight-bold text-primary">따릉이 이용량 1위</h6>
+                                </div>
+                                <div class="card-body">
                                     <div class="chart-bar">
-                                        <canvas id="myBarChart"></canvas>
+                                        <canvas id="Station1"></canvas>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <!-- Bar Chart -->
+                            <div class="card shadow mt-4 mb-4 h-60">
+                                <div class="card-header py-2">
+                                    <h6 class="m-0 font-weight-bold text-primary">따릉이 이용량 2위</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <canvas id="Station2"></canvas>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <!-- Bar Chart -->
+                            <div class="card shadow mt-4 mb-4 h-60">
+                                <div class="card-header py-2">
+                                    <h6 class="m-0 font-weight-bold text-primary">따릉이 이용량 3위</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <canvas id="Station3"></canvas>
                                     </div>
                                     <hr>
                                 </div>
