@@ -72,6 +72,8 @@ def rain_usage():
     fig.update_traces(hovertemplate='<b>%{text}</b><br>', text=rainusage.usage_amt)
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    fig.update_xaxes(title_text="강우량 (mm)")
+    fig.update_yaxes(title_text="따릉이 이용량 (건)")
     plot_div = plot(fig, output_type='div')
 
     return plot_div
@@ -88,6 +90,8 @@ def monthusage():
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     plot_div = plot(fig, output_type='div')
+    fig.update_xaxes(title_text="연월")
+    fig.update_yaxes(title_text="따릉이 이용량 (건)")
     return plot_div
 
 # 윌/시간대 - 시간대별 따릉이 이용량
@@ -100,7 +104,7 @@ def timeusage():
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="시간대")
-    fig.update_yaxes(title_text="따릉이 이용량")
+    fig.update_yaxes(title_text="따릉이 이용량 (건)")
     plot_div = plot(fig, output_type='div')
     return plot_div
 
@@ -116,7 +120,7 @@ def lifeusage():
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="시간대별 생활인구와 따릉이 이용량", tickangle=45)
     fig.update_yaxes(title_text="생활인구", secondary_y=True)
-    fig.update_yaxes(title_text="대여소 이용량", secondary_y=False)
+    fig.update_yaxes(title_text="따릉이 이용량 (건)", secondary_y=False)
     plot_div = plot(fig, output_type='div')
     return plot_div
 
@@ -132,7 +136,7 @@ def subusage():
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="시간대별 지하철 유동인구와 따릉이 이용량", tickangle=45)
     fig.update_yaxes(title_text="지하철 유동인구", secondary_y=True)
-    fig.update_yaxes(title_text="대여소 이용량", secondary_y=False)
+    fig.update_yaxes(title_text="따릉이 이용량 (건)", secondary_y=False)
     plot_div = plot(fig, output_type='div')
     return plot_div
 
@@ -148,7 +152,7 @@ def bususage():
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="시간대별 버스 유동인구와 따릉이 이용량", tickangle=45)
     fig.update_yaxes(title_text="버스 유동인구", secondary_y=True)
-    fig.update_yaxes(title_text="대여소 이용량", secondary_y=False)
+    fig.update_yaxes(title_text="따릉이 이용량 (건)", secondary_y=False)
     plot_div = plot(fig, output_type='div')
     return plot_div
 
@@ -170,7 +174,7 @@ def transportation():
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="대여소 근처 교통시설 수")
-    fig.update_yaxes(title_text="따릉이 이용량 (건)")
+    fig.update_yaxes(title_text="대여소 이용량 (건)")
     fig.update_yaxes(range=[0, 200000])
     plot_div = plot(fig, output_type='div')
     return plot_div
@@ -191,7 +195,7 @@ def neighborhood():
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="대여소 근처 근린시설 수")
-    fig.update_yaxes(title_text="따릉이 이용량 (건)")
+    fig.update_yaxes(title_text="대여소 이용량 (건)")
     fig.update_yaxes(range=[0, 200000])
     plot_div = plot(fig, output_type='div')
     return plot_div
@@ -211,7 +215,7 @@ def education():
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="대여소 근처 교육시설 수")
-    fig.update_yaxes(title_text="따릉이 이용량 (건)")
+    fig.update_yaxes(title_text="대여소 이용량 (건)")
     fig.update_yaxes(range=[0, 200000])
     plot_div = plot(fig, output_type='div')
     return plot_div
