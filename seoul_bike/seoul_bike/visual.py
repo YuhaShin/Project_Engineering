@@ -55,7 +55,7 @@ def topStation_id():
 def rain_usage():
     rain_usage = pd.DataFrame(list(RainUsage06.objects.all().values()))
     fig = px.bar(rain_usage, x='rain_amt', y='usage_amt',
-                 color_continuous_scale='teal')
+                 color_continuous_scale='tealgrn')
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     fig.update_yaxes(visible=False, showticklabels=False)
     fig.update_coloraxes(showscale=False)
@@ -123,7 +123,7 @@ def lifeusage():
     fig.add_trace(go.Scatter(x=populusage.base_tm, y=populusage['life_popul'], mode='lines+markers',
                              line={'width': 7}, marker=dict(color='gold', size=15)), secondary_y=True)
     fig.add_trace(go.Bar(x=populusage.base_tm, y=populusage['usage_amt'], name="사용량",
-                        marker=dict(color=populusage['usage_amt'], colorscale='teal')), secondary_y=False)
+                        marker=dict(color=populusage['usage_amt'], colorscale='tealgrn')), secondary_y=False)
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="시간대별 생활인구와 따릉이 이용량", tickangle=45)
     fig.update_yaxes(title_text="생활인구", secondary_y=True)
@@ -139,7 +139,7 @@ def subusage():
     fig.add_trace(go.Scatter(x=populusage.base_tm, y=populusage['sub_popul'], mode='lines+markers',
                             line={'width': 7}, marker=dict(color='gold', size=15)), secondary_y=True)
     fig.add_trace(go.Bar(x=populusage.base_tm, y=populusage['usage_amt'], name="사용량",
-                        marker=dict(color=populusage['usage_amt'], colorscale='teal')), secondary_y=False)
+                        marker=dict(color=populusage['usage_amt'], colorscale='tealgrn')), secondary_y=False)
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="시간대별 지하철 유동인구와 따릉이 이용량", tickangle=45)
     fig.update_yaxes(title_text="지하철 유동인구", secondary_y=True)
@@ -155,7 +155,7 @@ def bususage():
     fig.add_trace(go.Scatter(x=populusage.base_tm, y=populusage['bus_popul'], mode='lines+markers',
                             line={'width': 7}, marker=dict(color='gold', size=15)), secondary_y=True)
     fig.add_trace(go.Bar(x=populusage.base_tm, y=populusage['usage_amt'], name="사용량",
-                        marker=dict(color=populusage['usage_amt'], colorscale='teal')), secondary_y=False)
+                        marker=dict(color=populusage['usage_amt'], colorscale='tealgrn')), secondary_y=False)
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="시간대별 버스 유동인구와 따릉이 이용량", tickangle=45)
     fig.update_yaxes(title_text="버스 유동인구", secondary_y=True)
@@ -302,27 +302,27 @@ def transportation_facility():
     # df_road3 = _get_map('BIKE_ROAD', center[2], 2)
 
     # 1등 대여소
-    fig_first = px.scatter_mapbox(df_bus1, lat='lat', lon='lon', hover_name='bus_station_name', width=300, height=300, color_discrete_sequence=['turquoise'])
-    fig_first.add_trace(px.scatter_mapbox(df_sub1, lat='lat', lon='lon', hover_name='subway_station_name', width=300, height=300, color_discrete_sequence=['teal']).data[0])
+    fig_first = px.scatter_mapbox(df_bus1, lat='lat', lon='lon', hover_name='bus_station_name', color_discrete_sequence=['turquoise'])
+    fig_first.add_trace(px.scatter_mapbox(df_sub1, lat='lat', lon='lon', hover_name='subway_station_name', color_discrete_sequence=['teal']).data[0])
     fig_first.add_trace(px.scatter_mapbox(df_first, lat="lat", lon="lon", hover_data=['bike_station_id', 'station_addr'], color_discrete_sequence=['red']).data[0])
-    fig_first.update_layout(autosize=False, hovermode='closest', width=300, height=300, margin=dict(l=0, r=0, b=0, t=0))
+    fig_first.update_layout(autosize=True, hovermode='closest', margin=dict(l=0, r=0, b=0, t=0))
     fig_first.update_mapboxes(bearing=0, accesstoken=mapboxt, pitch=0, zoom=12)
     fig_first.update_traces(marker={'size': 10})
     fig_first.update_layout(mapbox_center=dict(lat=center[0][1], lon=center[0][0]))
 
     # 2등 대여소
-    fig_second = px.scatter_mapbox(df_bus2, lat='lat', lon='lon', hover_name='bus_station_name', width=300, height=300, color_discrete_sequence=['turquoise'])
-    fig_second.add_trace(px.scatter_mapbox(df_sub2, lat='lat', lon='lon', hover_name='subway_station_name', width=300, height=300, color_discrete_sequence=['teal']).data[0])
+    fig_second = px.scatter_mapbox(df_bus2, lat='lat', lon='lon', hover_name='bus_station_name', color_discrete_sequence=['turquoise'])
+    fig_second.add_trace(px.scatter_mapbox(df_sub2, lat='lat', lon='lon', hover_name='subway_station_name', color_discrete_sequence=['teal']).data[0])
     fig_second.add_trace(px.scatter_mapbox(df_second, lat="lat", lon="lon", hover_data=['bike_station_id', 'station_addr'], color_discrete_sequence=['red']).data[0])
-    fig_second.update_layout(autosize=False, hovermode='closest', width=300, height=300, margin=dict(l=0, r=0, b=0, t=0))
+    fig_second.update_layout(autosize=True, hovermode='closest', margin=dict(l=0, r=0, b=0, t=0))
     fig_second.update_mapboxes(bearing=0, accesstoken=mapboxt, pitch=0, zoom=12)
     fig_second.update_traces(marker={'size': 10})
     fig_second.update_layout(mapbox_center=dict(lat=center[1][1], lon=center[1][0]))
     # 3등 대여소
-    fig_third = px.scatter_mapbox(df_bus3, lat='lat', lon='lon', hover_name='bus_station_name', width=300, height=300, color_discrete_sequence=['turquoise'])
-    fig_third.add_trace(px.scatter_mapbox(df_sub3, lat='lat', lon='lon', hover_name='subway_station_name', width=300, height=300, color_discrete_sequence=['teal']).data[0])
+    fig_third = px.scatter_mapbox(df_bus3, lat='lat', lon='lon', hover_name='bus_station_name', color_discrete_sequence=['turquoise'])
+    fig_third.add_trace(px.scatter_mapbox(df_sub3, lat='lat', lon='lon', hover_name='subway_station_name', color_discrete_sequence=['teal']).data[0])
     fig_third.add_trace(px.scatter_mapbox(df_third, lat="lat", lon="lon", hover_data=['bike_station_id', 'station_addr'], color_discrete_sequence=['red']).data[0])
-    fig_third.update_layout(autosize=False, hovermode='closest', width=300, height=300, margin=dict(l=0, r=0, b=0, t=0))
+    fig_third.update_layout(autosize=True, hovermode='closest', margin=dict(l=0, r=0, b=0, t=0))
     fig_third.update_mapboxes(bearing=0, accesstoken=mapboxt, pitch=0, zoom=12)
     fig_third.update_traces(marker={'size': 10})
     fig_third.update_layout(mapbox_center=dict(lat=center[2][1], lon=center[2][0]))
@@ -357,27 +357,27 @@ def neighborhood_facility():
     df_mall3 = _get_map('MALL', center[2], 2)
 
     # 1등 대여소
-    fig_first = px.scatter_mapbox(df_park1, lat='lat', lon='lon', hover_name='park_nm', width=300, height=300, color_discrete_sequence=['seagreen'])
-    fig_first.add_trace(px.scatter_mapbox(df_mall1, lat='lat', lon='lon', hover_name='mall_nm', width=300, height=300, color_discrete_sequence=['mediumaquamarine']).data[0])
+    fig_first = px.scatter_mapbox(df_park1, lat='lat', lon='lon', hover_name='park_nm', color_discrete_sequence=['seagreen'])
+    fig_first.add_trace(px.scatter_mapbox(df_mall1, lat='lat', lon='lon', hover_name='mall_nm', color_discrete_sequence=['mediumaquamarine']).data[0])
     fig_first.add_trace(px.scatter_mapbox(df_first, lat="lat", lon="lon", hover_data=['bike_station_id', 'station_addr'], color_discrete_sequence=['red']).data[0])
-    fig_first.update_layout(autosize=False, hovermode='closest', width=300, height=300, margin=dict(l=0, r=0, b=0, t=0))
+    fig_first.update_layout(autosize=True, hovermode='closest', margin=dict(l=0, r=0, b=0, t=0))
     fig_first.update_mapboxes(bearing=0, accesstoken=mapboxt, pitch=0, zoom=12)
     fig_first.update_traces(marker={'size': 10})
     fig_first.update_layout(mapbox_center=dict(lat=center[0][1], lon=center[0][0]))
 
     # 2등 대여소
-    fig_second = px.scatter_mapbox(df_park2, lat='lat', lon='lon', hover_name='park_nm', width=300, height=300, color_discrete_sequence=['seagreen'])
-    fig_second.add_trace(px.scatter_mapbox(df_mall2, lat='lat', lon='lon', hover_name='mall_nm', width=300, height=300, color_discrete_sequence=['mediumaquamarine']).data[0])
+    fig_second = px.scatter_mapbox(df_park2, lat='lat', lon='lon', hover_name='park_nm', color_discrete_sequence=['seagreen'])
+    fig_second.add_trace(px.scatter_mapbox(df_mall2, lat='lat', lon='lon', hover_name='mall_nm', color_discrete_sequence=['mediumaquamarine']).data[0])
     fig_second.add_trace(px.scatter_mapbox(df_second, lat="lat", lon="lon", hover_data=['bike_station_id', 'station_addr'], color_discrete_sequence=['red']).data[0])
-    fig_second.update_layout(autosize=False, hovermode='closest', width=300, height=300, margin=dict(l=0, r=0, b=0, t=0))
+    fig_second.update_layout(autosize=True, hovermode='closest', margin=dict(l=0, r=0, b=0, t=0))
     fig_second.update_mapboxes(bearing=0, accesstoken=mapboxt, pitch=0, zoom=12)
     fig_second.update_traces(marker={'size': 10})
     fig_second.update_layout(mapbox_center=dict(lat=center[1][1], lon=center[1][0]))
     # 3등 대여소
-    fig_third = px.scatter_mapbox(df_park3, lat='lat', lon='lon', hover_name='park_nm', width=300, height=300, color_discrete_sequence=['seagreen'])
-    fig_third.add_trace(px.scatter_mapbox(df_mall3, lat='lat', lon='lon', hover_name='mall_nm', width=300, height=300, color_discrete_sequence=['mediumaquamarine']).data[0])
+    fig_third = px.scatter_mapbox(df_park3, lat='lat', lon='lon', hover_name='park_nm', color_discrete_sequence=['seagreen'])
+    fig_third.add_trace(px.scatter_mapbox(df_mall3, lat='lat', lon='lon', hover_name='mall_nm', color_discrete_sequence=['mediumaquamarine']).data[0])
     fig_third.add_trace(px.scatter_mapbox(df_third, lat="lat", lon="lon", hover_data=['bike_station_id', 'station_addr'], color_discrete_sequence=['red']).data[0])
-    fig_third.update_layout(autosize=False, hovermode='closest', width=300, height=300, margin=dict(l=0, r=0, b=0, t=0))
+    fig_third.update_layout(autosize=True, hovermode='closest', margin=dict(l=0, r=0, b=0, t=0))
     fig_third.update_mapboxes(bearing=0, accesstoken=mapboxt, pitch=0, zoom=12)
     fig_third.update_traces(marker={'size': 10})
     fig_third.update_layout(mapbox_center=dict(lat=center[2][1], lon=center[2][0]))
@@ -418,37 +418,37 @@ def education_facility():
     df_event3 = _get_map('EVENT_PLACE', center[2], 2)
 
     # 1등 대여소
-    fig_first = px.scatter_mapbox(df_school1, lat='lat', lon='lon', hover_name='school_nm', width=300, height=300, color_discrete_sequence=['lime'])
-    fig_first.add_trace(px.scatter_mapbox(df_tour1, lat='lat', lon='lon', hover_name='place_nm', width=300, height=300, color_discrete_sequence=['greenyellow']).data[0])
-    fig_first.add_trace(px.scatter_mapbox(df_culture1, lat='lat', lon='lon', hover_name='place_nm', width=300, height=300, color_discrete_sequence=['mediumseagreen']).data[0])
-    fig_first.add_trace(px.scatter_mapbox(df_event1, lat='lat', lon='lon', hover_name='place_nm', width=300, height=300, color_discrete_sequence=['darkgreen']).data[0])
+    fig_first = px.scatter_mapbox(df_school1, lat='lat', lon='lon', hover_name='school_nm', color_discrete_sequence=['lime'])
+    fig_first.add_trace(px.scatter_mapbox(df_tour1, lat='lat', lon='lon', hover_name='place_nm', color_discrete_sequence=['greenyellow']).data[0])
+    fig_first.add_trace(px.scatter_mapbox(df_culture1, lat='lat', lon='lon', hover_name='place_nm', color_discrete_sequence=['mediumseagreen']).data[0])
+    fig_first.add_trace(px.scatter_mapbox(df_event1, lat='lat', lon='lon', hover_name='place_nm', color_discrete_sequence=['darkgreen']).data[0])
     fig_first.add_trace(px.scatter_mapbox(df_first, lat="lat", lon="lon", hover_data=['bike_station_id', 'station_addr'], color_discrete_sequence=['red']).data[0])
 
-    fig_first.update_layout(autosize=False, hovermode='closest', width=300, height=300, margin=dict(l=0, r=0, b=0, t=0))
+    fig_first.update_layout(autosize=True, hovermode='closest', margin=dict(l=0, r=0, b=0, t=0))
     fig_first.update_mapboxes(bearing=0, accesstoken=mapboxt, pitch=0, zoom=12)
     fig_first.update_traces(marker={'size': 10})
     fig_first.update_layout(mapbox_center=dict(lat=center[0][1], lon=center[0][0]))
 
     # 2등 대여소
-    fig_second = px.scatter_mapbox(df_school2, lat='lat', lon='lon', hover_name='school_nm', width=300, height=300, color_discrete_sequence=['lime'])
-    fig_second.add_trace(px.scatter_mapbox(df_tour2, lat='lat', lon='lon', hover_name='place_nm', width=300, height=300, color_discrete_sequence=['greenyellow']).data[0])
-    fig_second.add_trace(px.scatter_mapbox(df_culture2, lat='lat', lon='lon', hover_name='place_nm', width=300, height=300, color_discrete_sequence=['mediumseagreen']).data[0])
-    fig_second.add_trace(px.scatter_mapbox(df_event2, lat='lat', lon='lon', hover_name='place_nm', width=300, height=300, color_discrete_sequence=['darkgreen']).data[0])
+    fig_second = px.scatter_mapbox(df_school2, lat='lat', lon='lon', hover_name='school_nm', color_discrete_sequence=['lime'])
+    fig_second.add_trace(px.scatter_mapbox(df_tour2, lat='lat', lon='lon', hover_name='place_nm', color_discrete_sequence=['greenyellow']).data[0])
+    fig_second.add_trace(px.scatter_mapbox(df_culture2, lat='lat', lon='lon', hover_name='place_nm', color_discrete_sequence=['mediumseagreen']).data[0])
+    fig_second.add_trace(px.scatter_mapbox(df_event2, lat='lat', lon='lon', hover_name='place_nm', color_discrete_sequence=['darkgreen']).data[0])
     fig_second.add_trace(px.scatter_mapbox(df_second, lat="lat", lon="lon", hover_data=['bike_station_id', 'station_addr'], color_discrete_sequence=['red']).data[0])
 
-    fig_second.update_layout(autosize=False, hovermode='closest', width=300, height=300, margin=dict(l=0, r=0, b=0, t=0))
+    fig_second.update_layout(autosize=True, hovermode='closest', margin=dict(l=0, r=0, b=0, t=0))
     fig_second.update_mapboxes(bearing=0, accesstoken=mapboxt, pitch=0, zoom=12)
     fig_second.update_traces(marker={'size': 10})
     fig_second.update_layout(mapbox_center=dict(lat=center[1][1], lon=center[1][0]))
 
     # 3등 대여소
-    fig_third = px.scatter_mapbox(df_school3, lat='lat', lon='lon', hover_name='school_nm', width=300, height=300, color_discrete_sequence=['lime'])
-    fig_third.add_trace(px.scatter_mapbox(df_tour3, lat='lat', lon='lon', hover_name='place_nm', width=300, height=300, color_discrete_sequence=['greenyellow']).data[0])
-    fig_third.add_trace(px.scatter_mapbox(df_culture3, lat='lat', lon='lon', hover_name='place_nm', width=300, height=300, color_discrete_sequence=['mediumseagreen']).data[0])
-    fig_third.add_trace(px.scatter_mapbox(df_event3, lat='lat', lon='lon', hover_name='place_nm', width=300, height=300, color_discrete_sequence=['darkgreen']).data[0])
+    fig_third = px.scatter_mapbox(df_school3, lat='lat', lon='lon', hover_name='school_nm', color_discrete_sequence=['lime'])
+    fig_third.add_trace(px.scatter_mapbox(df_tour3, lat='lat', lon='lon', hover_name='place_nm', color_discrete_sequence=['greenyellow']).data[0])
+    fig_third.add_trace(px.scatter_mapbox(df_culture3, lat='lat', lon='lon', hover_name='place_nm', color_discrete_sequence=['mediumseagreen']).data[0])
+    fig_third.add_trace(px.scatter_mapbox(df_event3, lat='lat', lon='lon', hover_name='place_nm', color_discrete_sequence=['darkgreen']).data[0])
     fig_third.add_trace(px.scatter_mapbox(df_third, lat="lat", lon="lon", hover_data=['bike_station_id', 'station_addr'], color_discrete_sequence=['red']).data[0])
 
-    fig_third.update_layout(autosize=False, hovermode='closest', width=300, height=300, margin=dict(l=0, r=0, b=0, t=0))
+    fig_third.update_layout(autosize=True, hovermode='closest', margin=dict(l=0, r=0, b=0, t=0))
     fig_third.update_mapboxes(bearing=0, accesstoken=mapboxt, pitch=0, zoom=12)
     fig_third.update_traces(marker={'size': 10})
     fig_third.update_layout(mapbox_center=dict(lat=center[2][1], lon=center[2][0]))
