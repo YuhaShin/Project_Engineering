@@ -235,6 +235,7 @@
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">강우량과 따릉이 이용량</h6>
+
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -252,8 +253,13 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart" class="chartjs-render-monitor"></canvas>
+                                    <div class="h-100">
+                                        <div>
+                                            {% autoescape off %}
+                                            {{ rain_usage }}
+                                            {% endautoescape %}
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

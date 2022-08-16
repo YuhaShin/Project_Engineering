@@ -5,8 +5,9 @@ from . import visual
 
 def index(request):
     contexts = dict()
-    contexts['countStationId'] = visual.countStationId()
+    # contexts['countStationId'] = visual.countStationId()
     contexts['yearUsage'] = visual.year_usage()
+    contexts['rain_usage'] = visual.rain_usage()
     return render(request, 'index.html', contexts)
 
 
