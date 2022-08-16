@@ -53,17 +53,6 @@ def topStation_id():
 
 # 강우량과 공공자전거 이용량
 def rain_usage():
-    rain_usage = pd.DataFrame(list(RainUsage06.objects.all().values()))
-    fig = px.bar(rain_usage, x='rain_amt', y='usage_amt',
-                 color_continuous_scale='tealgrn')
-    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
-    fig.update_yaxes(visible=False, showticklabels=False)
-    fig.update_coloraxes(showscale=False)
-    plot_div = plot(fig, output_type='div')
-    return plot_div
-
-
-def rain_usage():
     rain_usage06 = pd.DataFrame(list(RainUsage06.objects.all().values()))
 
     # rain_amt 내림차순으로 sort 한 후 처음 0인 지점까지 가져온다
@@ -79,7 +68,7 @@ def rain_usage():
     rainusage = rainusage.sort_values('rain_amt')
     rainusage = rainusage.astype({'rain_amt':'string'})
 
-    fig = px.bar(rainusage, x='rain_amt', y='usage_amt')
+    fig = px.bar(rainusage, x='rain_amt', y='usage_amt', color_discrete_sequence =['mediumturquoise'])
     fig.update_traces(hovertemplate='<b>%{text}</b><br>', text=rainusage.usage_amt)
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
@@ -94,7 +83,7 @@ def rain_usage():
 def monthusage():
     monthusage = pd.DataFrame(list(MonthUsage.objects.all().values()))
     fig = px.bar(monthusage, x= 'base_mm', y= 'usage_amt',
-                 color_continuous_scale='tealgrn', template='plotly_white')
+                 color_discrete_sequence =['darkcyan'])
     fig.update_traces(hovertemplate='<b>%{text}</b><br>', text=monthusage.usage_amt)
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
@@ -107,7 +96,7 @@ def timeusage():
     fig = go.Figure()
     # fig = px.line(timeusage, x='base_tm', y='usage_amt', template='plotly_white')
     fig.add_trace(go.Scatter(x=timeusage.base_tm, y=timeusage.usage_amt, mode='lines',
-                             line={'width': 5}, fill='tozeroy'))
+                             line={'width': 5}, fill='tozeroy', fillcolor='rgba(65, 105, 225, 0.3)'))
     fig.update_coloraxes(showscale=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="시간대")
@@ -121,7 +110,7 @@ def lifeusage():
     populusage = pd.DataFrame(list(PopulUsage.objects.all().values()))
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=populusage.base_tm, y=populusage['life_popul'], mode='lines+markers',
-                             line={'width': 7}, marker=dict(color='gold', size=15)), secondary_y=True)
+                             line={'width': 5}, marker=dict(color='gold', size=10)), secondary_y=True)
     fig.add_trace(go.Bar(x=populusage.base_tm, y=populusage['usage_amt'], name="사용량",
                         marker=dict(color=populusage['usage_amt'], colorscale='tealgrn')), secondary_y=False)
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
@@ -137,7 +126,7 @@ def subusage():
     populusage = pd.DataFrame(list(PopulUsage.objects.all().values()))
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=populusage.base_tm, y=populusage['sub_popul'], mode='lines+markers',
-                            line={'width': 7}, marker=dict(color='gold', size=15)), secondary_y=True)
+                            line={'width': 5}, marker=dict(color='gold', size=10)), secondary_y=True)
     fig.add_trace(go.Bar(x=populusage.base_tm, y=populusage['usage_amt'], name="사용량",
                         marker=dict(color=populusage['usage_amt'], colorscale='tealgrn')), secondary_y=False)
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
@@ -153,7 +142,7 @@ def bususage():
     populusage = pd.DataFrame(list(PopulUsage.objects.all().values()))
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=populusage.base_tm, y=populusage['bus_popul'], mode='lines+markers',
-                            line={'width': 7}, marker=dict(color='gold', size=15)), secondary_y=True)
+                            line={'width': 5}, marker=dict(color='gold', size=10)), secondary_y=True)
     fig.add_trace(go.Bar(x=populusage.base_tm, y=populusage['usage_amt'], name="사용량",
                         marker=dict(color=populusage['usage_amt'], colorscale='tealgrn')), secondary_y=False)
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
