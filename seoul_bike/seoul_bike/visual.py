@@ -112,7 +112,7 @@ def lifeusage():
     fig.add_trace(go.Scatter(x=populusage.base_tm, y=populusage['life_popul'], mode='lines+markers',
                              line={'width': 5}, marker=dict(color='gold', size=10)), secondary_y=True)
     fig.add_trace(go.Bar(x=populusage.base_tm, y=populusage['usage_amt'], name="사용량",
-                        marker=dict(color=populusage['usage_amt'], colorscale='teal')), secondary_y=False)
+                        marker=dict(color=populusage['usage_amt'], colorscale='tealgrn')), secondary_y=False)
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="시간대별 생활인구와 따릉이 이용량", tickangle=45)
     fig.update_yaxes(title_text="생활인구", secondary_y=True)
@@ -128,7 +128,7 @@ def subusage():
     fig.add_trace(go.Scatter(x=populusage.base_tm, y=populusage['sub_popul'], mode='lines+markers',
                             line={'width': 5}, marker=dict(color='gold', size=10)), secondary_y=True)
     fig.add_trace(go.Bar(x=populusage.base_tm, y=populusage['usage_amt'], name="사용량",
-                        marker=dict(color=populusage['usage_amt'], colorscale='teal')), secondary_y=False)
+                        marker=dict(color=populusage['usage_amt'], colorscale='tealgrn')), secondary_y=False)
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="시간대별 지하철 유동인구와 따릉이 이용량", tickangle=45)
     fig.update_yaxes(title_text="지하철 유동인구", secondary_y=True)
@@ -144,7 +144,7 @@ def bususage():
     fig.add_trace(go.Scatter(x=populusage.base_tm, y=populusage['bus_popul'], mode='lines+markers',
                             line={'width': 5}, marker=dict(color='gold', size=10)), secondary_y=True)
     fig.add_trace(go.Bar(x=populusage.base_tm, y=populusage['usage_amt'], name="사용량",
-                        marker=dict(color=populusage['usage_amt'], colorscale='teal')), secondary_y=False)
+                        marker=dict(color=populusage['usage_amt'], colorscale='tealgrn')), secondary_y=False)
     fig.update_layout(template='plotly_white', showlegend=False, margin=dict(l=10, r=10, t=10, b=10))
     fig.update_xaxes(title_text="시간대별 버스 유동인구와 따릉이 이용량", tickangle=45)
     fig.update_yaxes(title_text="버스 유동인구", secondary_y=True)
